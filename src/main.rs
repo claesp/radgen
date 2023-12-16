@@ -8,13 +8,16 @@ struct Config {
 fn generate_data() {
 }
 
-fn write_to_file() {
+fn load_config_file() {
 }
 
-fn parse_args() {
+fn load_defaults() {
+}
+
+fn parse_args() -> Config {
     let args = Config::parse();
 
-    println!("server_type: {:?}", args.server_type)
+    return args;
 }
 
 fn read_definition() {
@@ -23,8 +26,16 @@ fn read_definition() {
 fn send_to_remote() {
 }
 
+fn write_to_file() {
+}
+
 fn main() {
-    parse_args();
+    load_defaults();
+    load_config_file();
+
+    let args = parse_args();
+    println!("server_type: {:?}", args.server_type);
+
     read_definition();
     generate_data();
     write_to_file();
