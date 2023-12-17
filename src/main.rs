@@ -7,14 +7,20 @@ struct Config {
 
 fn generate_data() {}
 
+fn compare_config_set(config_a: Config, config_b: &mut Config) {
+    if config_a.server_type != config_b.server_type {
+        config_b.server_type = config_a.server_type;
+    }
+}
+
 fn load_config_file(global_config: &mut Config) {
     let file_args = Config {
         server_type: String::from("unknown"),
     };
 
-    if file_args.server_type != global_config.server_type {
-        global_config.server_type = file_args.server_type;
-    }
+    /* TODO: Load from external file. */
+
+    compare_config_set(file_args, global_config);
 }
 
 fn load_config_defaults() -> Config {
@@ -25,10 +31,7 @@ fn load_config_defaults() -> Config {
 
 fn load_config_args(global_config: &mut Config) {
     let args = Config::parse();
-
-    if args.server_type != global_config.server_type {
-        global_config.server_type = args.server_type;
-    }
+    compare_config_set(args, global_config);
 }
 
 fn read_definition() {}
